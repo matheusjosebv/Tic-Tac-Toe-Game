@@ -1,7 +1,14 @@
-import css from "./App.module.scss";
+import "./App.scss";
+import Board from "../Board/Board";
 
 function App() {
-  return <div className={css.root}>App</div>;
+  const board = ["X", "X", "X", "X", "X", "X", "X", "X", "X"];
+
+  return (
+    <div className="app">
+      <Board board={board} onClick={null} />
+    </div>
+  );
 }
 
 export default App;
