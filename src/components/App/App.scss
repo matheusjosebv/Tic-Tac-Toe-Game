@@ -1,4 +1,20 @@
 @import "../../styles/shared.scss";
 
-.root {
+.app {
+  position: relative;
+
+  .winnerMessage {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    font-size: 2rem;
+  }
+
+  .XWon {
+    color: $red;
+  }
+
+  .OWon {
+    color: $blue;
+  }
 }

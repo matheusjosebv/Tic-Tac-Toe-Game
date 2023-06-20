@@ -1,0 +1,19 @@
+@import "../../styles/shared.scss";
+
+.resetBtn {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.5rem 1rem;
+
+  font-size: 2rem;
+  border-radius: 0.5rem;
+
+  border: none;
+  color: white;
+  background: $blue;
+  transition: 0.2s background;
+
+  &:hover {
+    background: $dark-blue;
+  }
+}
