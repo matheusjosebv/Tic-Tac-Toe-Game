@@ -5,7 +5,11 @@ export default function Board({ board, onClick }) {
   return (
     <div className="board">
       {board.map((value, i) => (
-        <Box key={i} value={value} onClick={() => onClick(i)} />
+        <Box
+          key={i}
+          value={value}
+          onClick={() => value === null && onClick(i)}
+        />
       ))}
     </div>
   );
