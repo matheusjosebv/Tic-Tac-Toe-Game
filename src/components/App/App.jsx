@@ -19,7 +19,7 @@ function App() {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xPlaying, setXPlaying] = useState(true);
   const [gameOver, setGameOver] = useState(false);
-  const [scores, setScores] = useState({ xScore: 0, oScore: 0, winner: "" });
+  const [scores, setScores] = useState({ xScore: 0, oScore: 0, result: "" });
 
   const handleBoxClick = (boxIndex) => {
     const updatedBoard = board.map((value, i) => {
@@ -34,10 +34,17 @@ function App() {
 
     if (winner) {
       if (winner === "O") {
-        setScores((prev) => ({ ...prev, oScore: prev.oScore++, winner: "O" }));
+        setScores((prev) => ({ ...prev, oScore: prev.oScore++, result: "O" }));
       } else {
-        setScores((prev) => ({ ...prev, xScore: prev.xScore++, winner: "X" }));
+        setScores((prev) => ({ ...prev, xScore: prev.xScore++, result: "X" }));
       }
+      setGameOver(true);
+    }
+
+    const lastRound = updatedBoard.find((v) => v === null);
+
+    if (!winner && lastRound === undefined) {
+      setScores((prev) => ({ ...prev, result: "Draw" }));
       setGameOver(true);
     }
 
@@ -62,13 +69,17 @@ function App() {
 
   return (
     <div className="app">
-      <ScoreBoard scores={scores} xPlaying={xPlaying} />
+      <ScoreBoard scores={scores} gameOver={gameOver} xPlaying={xPlaying} />
       <Board board={board} onClick={!gameOver ? handleBoxClick : () => {}} />
       {gameOver && (
         <div
-          className={`winnerMessage ${scores.winner === "X" ? "XWon" : "OWon"}`}
+          className={`resultMessage 
+          ${scores.result === "X" && "XWon"}
+          ${scores.result === "O" && "OWon"}`}
         >
-          {scores.winner} has won!
+          {scores.result === "O" && scores.result + " has won!"}
+          {scores.result === "X" && scores.result + " has won!"}
+          {scores.result === "Draw" && scores.result}
         </div>
       )}
       <ResetBtn onClick={resetGame} />

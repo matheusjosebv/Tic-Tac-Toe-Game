@@ -22,12 +22,14 @@
   .xScore {
     color: $red;
     border-bottom: 5px solid $red;
+    border-right: 1px solid #d3d3d3;
     border-radius: 0.5rem 0rem 0rem 0.5rem;
   }
 
   .oScore {
     color: $blue;
     border-bottom: 5px solid $blue;
+    border-left: 1px solid #d3d3d3;
     border-radius: 0rem 0.5rem 0.5rem 0rem;
   }
 
