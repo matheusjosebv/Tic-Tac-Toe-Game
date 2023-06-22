@@ -5,25 +5,48 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  width: 20rem;
-  font-size: 1.5rem;
-  background-color: white;
+
+  width: 14.5rem;
   margin: 0 auto 3rem;
-  box-shadow: 0px 0px 8px #888888;
   border-radius: 0.5rem;
+
+  font-size: 1.5rem;
   font-weight: bold;
-  transform: translateY(50%);
+
   opacity: 0;
+  background-color: white;
+  transform: translateY(50%);
+  box-shadow: 0px 0px 8px #888888;
+
+  @include media-tablet {
+    width: 18rem;
+    font-size: 1.5rem;
+    margin: 0 auto 3rem;
+    border-radius: 0.5rem;
+  }
+
+  @include media-desktop {
+    width: 20rem;
+    font-size: 1.5rem;
+    margin: 0 auto 3rem;
+    border-radius: 0.5rem;
+  }
 
   .score {
     width: 100%;
+    padding: 0.8rem 0rem;
+
     text-align: center;
-    padding: 1rem 0rem;
-    box-sizing: border-box;
-    transform-origin: 0 0;
-    transition: 0.2s border-bottom;
-    transform: translateY(20%);
+
     opacity: 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+    transform: translateY(20%);
+    transition: 0.2s border-bottom;
+
+    @include media-tablet {
+      padding: 1rem 0rem;
+    }
   }
 
   .xScore {

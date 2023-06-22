@@ -2,21 +2,32 @@
 
 .resetBtn {
   display: block;
-  margin: 2rem auto;
   padding: 0.5rem 1rem;
+  width: 200px;
 
-  font-size: 2rem;
+  font-size: 1.6rem;
   border-radius: 0.5rem;
 
   border: none;
   color: white;
-  background: $blue;
+  background: $orange;
   transition: 0.2s background;
 
-  opacity: 0;
-  transform: translateY(50%);
+  cursor: pointer;
+
+  @include media-tablet {
+    padding: 0.5rem 1rem;
+    width: 300px;
+
+    font-size: 2rem;
+    border-radius: 0.5rem;
+  }
+
+  @include media-desktop {
+    width: 250px;
+  }
 
   &:hover {
-    background: $dark-blue;
+    opacity: 0.8;
   }
 }

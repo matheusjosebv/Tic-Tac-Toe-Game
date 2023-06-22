@@ -1,23 +1,12 @@
 /* eslint-disable react/prop-types */
-import gsap from "gsap";
 import "./ResetBtn.scss";
-import { useEffect, useRef } from "react";
 
-export default function ResetBtn({ onClick }) {
-  const resetBtnRef = useRef();
-
-  useEffect(() => {
-    const tl = gsap.timeline();
-
-    tl.to(resetBtnRef.current, { opacity: 1, y: 0, delay: 1.6 });
-    return () => {
-      tl.kill();
-    };
-  }, []);
-
+const ResetBtn = ({ onClick, name, className }) => {
   return (
-    <button ref={resetBtnRef} className="resetBtn" onClick={onClick}>
-      Reset
+    <button className={`resetBtn ${className}`} onClick={onClick}>
+      {name}
     </button>
   );
-}
+};
+
+export default ResetBtn;

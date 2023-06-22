@@ -20,6 +20,8 @@ function App() {
     [2, 4, 6],
   ];
 
+  const btnsRef = useRef();
+  const titleRef = useRef();
   const fireworksRef = useRef();
   const resultMessageRef = useRef();
   const [xPlaying, setXPlaying] = useState(true);
@@ -58,32 +60,55 @@ function App() {
     setBoard(updatedBoard);
   };
 
-  const checkWinner = (board) => {
+  const checkWinner = (b) => {
     for (let i = 0; i < WIN_CONDITIONS.length; i++) {
       const [x, y, z] = WIN_CONDITIONS[i];
 
-      if (board[x] && board[x] === board[y] && board[y] === board[z]) {
-        return board[x];
+      if (b[x] && b[x] === b[y] && b[y] === b[z]) {
+        const otherPieces = board;
+        console.log(x, y, z);
+        console.log(otherPieces);
+
+        return b[x];
       }
     }
   };
 
-  const resetGame = () => {
+  const restartMatch = () => {
     setGameOver(false);
     setBoard(Array(9).fill(null));
     setScores((prev) => ({ ...prev, result: "null" }));
   };
+
+  const resetScore = () => {
+    setGameOver(false);
+    setBoard(Array(9).fill(null));
+    setScores(() => ({ oScore: 0, xScore: 0, result: "null" }));
+  };
+
+  useEffect(() => {
+    const tl = gsap.timeline();
+    const btns = btnsRef.current.children;
+
+    tl.to(titleRef.current, { y: 0, opacity: 1, delay: 0.2 }).to(btns, {
+      y: 0,
+      opacity: 1,
+      delay: 1,
+      stagger: 0.2,
+    });
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
 
   useEffect(() => {
     let split;
     let tl;
 
     if (resultMessageRef.current) {
-      split = SplitText.create(resultMessageRef.current, {
-        lineClass: "text",
-      });
       tl = gsap.timeline();
-
+      split = SplitText.create(resultMessageRef.current, { lineClass: "text" });
       tl.from(split.chars, { y: 40, opacity: 0, ease: "back", stagger: 0.033 });
     }
 
@@ -95,8 +120,18 @@ function App() {
 
   return (
     <div className="app">
+      <h1 ref={titleRef} className="title">
+        <span className="tic">Tic</span>
+        <span className="tac">Tac</span>
+        Toe
+      </h1>
       <ScoreBoard scores={scores} gameOver={gameOver} xPlaying={xPlaying} />
-      <Board board={board} onClick={!gameOver ? handleBoxClick : () => {}} />
+      <Board
+        board={board}
+        turn={xPlaying}
+        gameOver={gameOver}
+        onClick={!gameOver ? handleBoxClick : () => {}}
+      />
       <div className="resultMessage">
         {gameOver && (
           <div
@@ -114,7 +149,11 @@ function App() {
           </div>
         )}
       </div>
-      <ResetBtn onClick={resetGame} />
+
+      <div ref={btnsRef} className="btns">
+        <ResetBtn className="restartMatch" onClick={restartMatch} name={"Restart Match"} />
+        <ResetBtn className="resetScore" onClick={resetScore} name={"Reset Score"} />
+      </div>
 
       {(scores.result === "O" || scores.result === "X") && (
         <Player

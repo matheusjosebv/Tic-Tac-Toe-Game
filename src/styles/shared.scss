@@ -3,3 +3,19 @@
 $red: rgb(255, 37, 142);
 $blue: rgb(44, 167, 255);
 $dark-blue: rgb(44, 119, 255);
+$orange: rgb(255, 169, 20);
+
+$breakpoint-tablet: 552px;
+$breakpoint-desktop: 900px;
+
+@mixin media-tablet {
+  @media (min-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+@mixin media-desktop {
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}

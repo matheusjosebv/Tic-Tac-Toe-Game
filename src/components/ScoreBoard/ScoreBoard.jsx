@@ -12,7 +12,7 @@ export default function ScoreBoard({ scores, xPlaying, gameOver }) {
     const tl = gsap.timeline();
     const score = scoreBoardRef.current;
 
-    tl.to(score, { y: 0, delay: 1.3, opacity: 1 }).to(score.children, {
+    tl.to(score, { y: 0, delay: 0.4, opacity: 1 }).to(score.children, {
       y: 0,
       opacity: 1,
       stagger: 0.2,
@@ -22,6 +22,7 @@ export default function ScoreBoard({ scores, xPlaying, gameOver }) {
       tl.kill();
     };
   }, []);
+
   return (
     <div className="scoreBoard" ref={scoreBoardRef}>
       <span

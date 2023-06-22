@@ -4,7 +4,7 @@ import gsap from "gsap";
 import Box from "../Box/Box";
 import { useEffect, useRef } from "react";
 
-export default function Board({ board, onClick }) {
+export default function Board({ board, onClick, turn, gameOver }) {
   const boardRef = useRef();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Board({ board, onClick }) {
     <div className="board" ref={boardRef}>
       {board.map((value, i) => (
         <Box
-          className="box"
+          className={`box ${!gameOver && !value && (turn ? "xHover" : "oHover")}`}
           key={i}
           value={value}
           onClick={() => value === null && onClick(i)}

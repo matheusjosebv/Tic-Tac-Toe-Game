@@ -2,11 +2,47 @@
 
 .board {
   display: grid;
-  grid-template-columns: repeat(3, 6rem);
   place-items: center;
   justify-content: center;
+  grid-template-columns: repeat(3, 5rem);
+
+  @include media-tablet {
+    grid-template-columns: repeat(3, 6.3rem);
+  }
+
+  @include media-desktop {
+    grid-template-columns: repeat(3, 7rem);
+  }
 
   > .box {
     transform: scale(0);
+  }
+
+  .oHover,
+  .xHover {
+    &:hover {
+      &::before {
+        content: "O";
+        opacity: 0.2;
+      }
+    }
+  }
+
+  .oHover {
+    &:hover {
+      &::before {
+        content: "O";
+        color: $blue;
+      }
+    }
+  }
+
+  .xHover {
+    &:hover {
+      &::before {
+        content: "X";
+        color: $red;
+      }
+    }
   }
 }
