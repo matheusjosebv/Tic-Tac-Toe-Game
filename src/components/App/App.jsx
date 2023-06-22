@@ -71,7 +71,7 @@ function App() {
   const resetGame = () => {
     setGameOver(false);
     setBoard(Array(9).fill(null));
-    setScores((prev) => ({ ...prev, result: "" }));
+    setScores((prev) => ({ ...prev, result: "null" }));
   };
 
   useEffect(() => {
