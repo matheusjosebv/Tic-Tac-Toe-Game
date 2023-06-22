@@ -13,6 +13,9 @@
   background: $blue;
   transition: 0.2s background;
 
+  opacity: 0;
+  transform: translateY(50%);
+
   &:hover {
     background: $dark-blue;
   }

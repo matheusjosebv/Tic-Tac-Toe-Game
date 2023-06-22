@@ -18,6 +18,10 @@
   &:hover {
     box-shadow: 0px 0px 15px #888;
   }
+
+  .character {
+    transform: scale(0);
+  }
 }
 
 .x {
