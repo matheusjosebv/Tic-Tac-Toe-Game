@@ -20,7 +20,7 @@ export default function Box({ value, onClick, className }) {
 
   const style = value === "X" ? "box x" : "box o";
   return (
-    <button ref={boxRef} onClick={onClick} className={`${style} ${className}`}>
+    <button ref={boxRef} onClick={onClick} className={`${style}  ${className}`}>
       <div className="character">{value}</div>
     </button>
   );

@@ -70,6 +70,10 @@
     color: $blue;
   }
 
+  .drawWon {
+    color: $orange;
+  }
+
   .btns {
     display: flex;
     gap: 25px;
@@ -90,6 +94,29 @@
     .restartMatch {
       opacity: 0;
       transform: translateY(50%);
+      transition: 0.2s color, 0.2s background, 0.2s border;
+    }
+
+    .restartMatch {
+      border: 1px solid $orange;
+      color: $orange;
+      background: white;
+
+      &:hover {
+        border: 1px solid $dark-orange;
+
+        color: $dark-orange;
+        background: $light-orange;
+      }
+    }
+
+    .resetScore {
+      color: white;
+      background: $orange;
+
+      &:hover {
+        background: $dark-orange;
+      }
     }
   }
 

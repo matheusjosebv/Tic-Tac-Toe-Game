@@ -27,7 +27,7 @@ function App() {
   const [xPlaying, setXPlaying] = useState(true);
   const [gameOver, setGameOver] = useState(false);
   const [board, setBoard] = useState(Array(9).fill(null));
-  const [scores, setScores] = useState({ xScore: 0, oScore: 0, result: "" });
+  const [scores, setScores] = useState({ xScore: 0, oScore: 0, ties: 0, result: "" });
 
   const handleBoxClick = (boxIndex) => {
     const updatedBoard = board.map((value, i) => {
@@ -42,9 +42,9 @@ function App() {
 
     if (winner) {
       if (winner === "O") {
-        setScores((prev) => ({ ...prev, oScore: prev.oScore++, result: "O" }));
+        setScores((prev) => ({ ...prev, oScore: prev.oScore + 1, result: "O" }));
       } else {
-        setScores((prev) => ({ ...prev, xScore: prev.xScore++, result: "X" }));
+        setScores((prev) => ({ ...prev, xScore: prev.xScore + 1, result: "X" }));
       }
       setGameOver(true);
     }
@@ -52,7 +52,7 @@ function App() {
     const lastRound = updatedBoard.find((v) => v === null);
 
     if (!winner && lastRound === undefined) {
-      setScores((prev) => ({ ...prev, result: "Draw" }));
+      setScores((prev) => ({ ...prev, ties: prev.ties + 1, result: "Draw" }));
       setGameOver(true);
     }
 
@@ -65,9 +65,7 @@ function App() {
       const [x, y, z] = WIN_CONDITIONS[i];
 
       if (b[x] && b[x] === b[y] && b[y] === b[z]) {
-        const otherPieces = board;
         console.log(x, y, z);
-        console.log(otherPieces);
 
         return b[x];
       }
@@ -83,19 +81,15 @@ function App() {
   const resetScore = () => {
     setGameOver(false);
     setBoard(Array(9).fill(null));
-    setScores(() => ({ oScore: 0, xScore: 0, result: "null" }));
+    setScores(() => ({ oScore: 0, xScore: 0, ties: 0, result: "null" }));
   };
 
   useEffect(() => {
     const tl = gsap.timeline();
     const btns = btnsRef.current.children;
 
-    tl.to(titleRef.current, { y: 0, opacity: 1, delay: 0.2 }).to(btns, {
-      y: 0,
-      opacity: 1,
-      delay: 1,
-      stagger: 0.2,
-    });
+    tl.to(titleRef.current, { y: 0, opacity: 1, delay: 0.2 }) //
+      .to(btns, { y: 0, opacity: 1, delay: 1, stagger: 0.2 });
 
     return () => {
       tl.kill();
@@ -125,13 +119,16 @@ function App() {
         <span className="tac">Tac</span>
         Toe
       </h1>
+
       <ScoreBoard scores={scores} gameOver={gameOver} xPlaying={xPlaying} />
+
       <Board
         board={board}
         turn={xPlaying}
         gameOver={gameOver}
         onClick={!gameOver ? handleBoxClick : () => {}}
       />
+
       <div className="resultMessage">
         {gameOver && (
           <div
@@ -139,12 +136,14 @@ function App() {
             id="resultMessage"
             className={`message
         ${scores.result === "X" && "XWon"}
-        ${scores.result === "O" && "OWon"}`}
+        ${scores.result === "O" && "OWon"}
+        ${scores.result === "Draw" && "drawWon"}
+        `}
           >
             <>
+              {scores.result === "Draw" && scores.result}
               {scores.result === "O" && scores.result + " has won!"}
               {scores.result === "X" && scores.result + " has won!"}
-              {scores.result === "Draw" && scores.result}
             </>
           </div>
         )}
@@ -157,9 +156,9 @@ function App() {
 
       {(scores.result === "O" || scores.result === "X") && (
         <Player
+          autoplay
           ref={fireworksRef}
           className="fireworks"
-          autoplay
           src="https://assets2.lottiefiles.com/packages/lf20_rovf9gzu.json"
         />
       )}

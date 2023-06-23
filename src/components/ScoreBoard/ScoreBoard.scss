@@ -10,7 +10,7 @@
   margin: 0 auto 3rem;
   border-radius: 0.5rem;
 
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: bold;
 
   opacity: 0;
@@ -20,7 +20,7 @@
 
   @include media-tablet {
     width: 18rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin: 0 auto 3rem;
     border-radius: 0.5rem;
   }
@@ -61,6 +61,11 @@
     border-bottom: 5px solid $blue;
     border-left: 1px solid #d3d3d3;
     border-radius: 0rem 0.5rem 0.5rem 0rem;
+  }
+
+  .ties {
+    color: $orange;
+    border-bottom: 5px solid $orange;
   }
 
   .inactive {

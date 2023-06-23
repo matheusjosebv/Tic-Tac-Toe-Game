@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { useEffect, useRef } from "react";
 
 export default function ScoreBoard({ scores, xPlaying, gameOver }) {
-  const { xScore, oScore } = scores;
+  const { xScore, oScore, ties } = scores;
 
   const scoreBoardRef = useRef();
 
@@ -31,6 +31,9 @@ export default function ScoreBoard({ scores, xPlaying, gameOver }) {
       >
         X - {xScore}
       </span>
+
+      <span className="score ties">Ties - {ties}</span>
+
       <span
         className={`score oScore ${xPlaying && "inactive"} 
         ${gameOver && "inactive"}`}
